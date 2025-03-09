@@ -14,7 +14,12 @@ func main() {
 		fm := filemanager.New("prices.txt", fmt.Sprintf("result_%.0f.json", taxRate*100))
 		// cmd := cmdmanager.New()
 		priceJob := prices.NewTaxIncludedPriceJob(fm, taxRate)
-		priceJob.Process()
+		err := priceJob.Process()
+
+		if err != nil {
+			fmt.Println("Failed to process the job")
+			fmt.Println(err)
+		}
 	}
 
 }
